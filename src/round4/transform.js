@@ -10,7 +10,7 @@ const graph = {
 
   async get(key) {
     const markdown = await folder.get(key);
-    const html = await rehype(markdown);
+    const html = markdown ? await rehype(markdown) : undefined;
     return html;
   },
 };

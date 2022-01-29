@@ -14,7 +14,16 @@ const graph = {
   },
 
   async get(key) {
-    const value = await fs.readFile(path.join(dirname, key));
+    let value;
+    try {
+      value = await fs.readFile(path.join(dirname, key));
+    } catch (error) {
+      if (error.code === "ENOENT") {
+        value = undefined;
+      } else {
+        throw error;
+      }
+    }
     return value;
   },
 };

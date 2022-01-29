@@ -10,7 +10,7 @@ export default function (graph) {
 
     async get(key) {
       const markdown = await graph.get(key);
-      const html = await rehype(markdown);
+      const html = markdown ? await rehype(markdown) : undefined;
       return html;
     },
   };
