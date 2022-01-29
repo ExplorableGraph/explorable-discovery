@@ -1,5 +1,12 @@
 {
   "name": "pattern-intro",
   "version": "0.0.1",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@explorablegraph/explorable": "0.0.7",
+    "unified": "10.1.1",
+    "remark-parse": "10.0.1",
+    "remark-rehype": "10.1.0",
+    "rehype-stringify": "9.0.2"
+  }
 }
