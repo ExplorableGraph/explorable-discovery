@@ -1,6 +1,6 @@
 import object from "./object.js";
 
-const graph = {
+export default {
   async *[Symbol.asyncIterator]() {
     for await (const key of object) {
       yield key;
@@ -12,5 +12,3 @@ const graph = {
     return value;
   },
 };
-
-export default graph;
