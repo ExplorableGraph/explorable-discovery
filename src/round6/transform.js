@@ -1,6 +1,6 @@
-import { MapGraph } from "@explorablegraph/explorable";
+import { MapValuesGraph } from "@explorablegraph/explorable";
 import rehype from "../rehype.js";
 
 export default function (graph) {
-  return new MapGraph(graph, rehype, ".md", ".html");
+  return new MapValuesGraph(graph, rehype, ".md", ".html");
 }
