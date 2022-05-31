@@ -2,40 +2,36 @@ import * as fs from "fs/promises";
 import path from "path";
 
 export default class FilesGraph {
-  #dirname;
-
   constructor(dirname) {
-    this.#dirname = dirname;
+    this.dirname = dirname;
   }
 
   async *[Symbol.asyncIterator]() {
-    const filenames = await fs.readdir(this.#dirname);
+    const filenames = await fs.readdir(this.dirname);
     for await (const key of filenames) {
       yield key;
     }
   }
 
   async get(key) {
-    let value;
+    const filePath = path.join(this.dirname, key);
     try {
-      value = await fs.readFile(path.join(this.#dirname, key));
+      return fs.readFile(filePath);
     } catch (error) {
       if (error.code === "ENOENT") {
-        value = undefined;
+        return undefined;
       } else {
         throw error;
       }
     }
-    return value;
   }
 
   async set(key, value) {
     // Ensure the directory exists.
-    await fs.mkdir(this.#dirname, { recursive: true });
+    await fs.mkdir(this.dirname, { recursive: true });
 
     // Write out the value as the contents of a file.
-    const filePath = path.join(this.#dirname, key);
-    const data = value.toString();
-    await fs.writeFile(filePath, data);
+    const filePath = path.join(this.dirname, key);
+    await fs.writeFile(filePath, value);
   }
 }

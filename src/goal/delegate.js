@@ -2,9 +2,7 @@ import object from "./object.js";
 
 const graph = {
   async *[Symbol.asyncIterator]() {
-    for await (const key of object) {
-      yield key;
-    }
+    yield* object;
   },
 
   async get(key) {

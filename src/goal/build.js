@@ -1,12 +1,13 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import FilesGraph from "./FilesGraph.js";
-import htmlFiles from "./htmlFiles.js";
+import siteGraph from "./siteGraph.js";
 
-const moduleFolder = path.dirname(fileURLToPath(import.meta.url));
-const distFiles = new FilesGraph(path.join(moduleFolder, "dist"));
+const modulePath = path.dirname(fileURLToPath(import.meta.url));
+const distPath = path.join(modulePath, "dist");
+const distGraph = new FilesGraph(distPath);
 
-for await (const key of htmlFiles) {
-  const html = await htmlFiles.get(key);
-  await distFiles.set(key, html);
+for await (const key of siteGraph) {
+  const html = await siteGraph.get(key);
+  await distGraph.set(key, html);
 }
