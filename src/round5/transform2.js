@@ -1,5 +1,5 @@
+import { marked } from "marked";
 import path from "path";
-import rehype from "../rehype.js";
 
 export default function (graph) {
   return {
@@ -11,8 +11,9 @@ export default function (graph) {
 
     async get(key) {
       const markdownKey = changeExtension(key, ".html", ".md");
-      const markdown = await graph.get(markdownKey);
-      const html = markdown ? await rehype(markdown) : undefined;
+      let markdown = await graph.get(markdownKey);
+      markdown = String(markdown);
+      const html = markdown ? await marked(markdown) : undefined;
       return html;
     },
   };

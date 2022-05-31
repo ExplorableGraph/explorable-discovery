@@ -1,4 +1,4 @@
-import rehype from "../rehype.js";
+import { marked } from "marked";
 import folder from "./folder.js";
 
 const graph = {
@@ -9,8 +9,9 @@ const graph = {
   },
 
   async get(key) {
-    const markdown = await folder.get(key);
-    const html = markdown ? await rehype(markdown) : undefined;
+    let markdown = await folder.get(key);
+    markdown = String(markdown);
+    const html = markdown ? await marked(markdown) : undefined;
     return html;
   },
 };
