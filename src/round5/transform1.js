@@ -9,8 +9,8 @@ export default function (graph) {
     },
 
     async get(key) {
-      let markdown = await graph.get(key);
-      markdown = String(markdown);
+      const value = await graph.get(key);
+      const markdown = String(value);
       const html = markdown ? await marked(markdown) : undefined;
       return html;
     },

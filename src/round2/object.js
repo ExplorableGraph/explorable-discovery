@@ -16,8 +16,7 @@ const graph = {
 
   // The function: returns the value for a given key
   async get(key) {
-    const value = obj[key];
-    return value;
+    return obj[key];
   },
 };
 

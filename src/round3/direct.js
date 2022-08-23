@@ -11,7 +11,7 @@ const graph = {
   // The function that returns the value for a given key
   // get("Alice.md") returns "Hello, **Alice**."
   async get(key) {
-    const name = key.slice(0, key.length - 3);
+    const name = key.slice(0, key.length - 3); // Remove extension
     return `Hello, **${name}**.`;
   },
 };

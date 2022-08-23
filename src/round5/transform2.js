@@ -1,26 +1,20 @@
 import { marked } from "marked";
-import path from "path";
 
 export default function (graph) {
   return {
     async *[Symbol.asyncIterator]() {
       for await (const key of graph) {
-        yield changeExtension(key, ".md", ".html");
+        const htmlKey = key.replace(/.md$/, ".html");
+        yield htmlKey;
       }
     },
 
     async get(key) {
-      const markdownKey = changeExtension(key, ".html", ".md");
-      let markdown = await graph.get(markdownKey);
-      markdown = String(markdown);
+      const markdownKey = key.replace(/.html$/, ".md");
+      const value = await graph.get(markdownKey);
+      const markdown = String(value);
       const html = markdown ? await marked(markdown) : undefined;
       return html;
     },
   };
-}
-
-function changeExtension(key, extension, newExtension) {
-  return path.extname(key) === extension
-    ? `${path.basename(key, extension)}${newExtension}`
-    : key;
 }

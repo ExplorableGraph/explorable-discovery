@@ -12,8 +12,7 @@ const graph = {
   },
 
   async get(key) {
-    const value = obj[key];
-    return value;
+    return obj[key];
   },
 };
 

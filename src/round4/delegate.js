@@ -1,16 +1,15 @@
-import object from "./object.js";
+import graph from "./object.js";
 
-const graph = {
+const delegate = {
   async *[Symbol.asyncIterator]() {
-    for await (const key of object) {
+    for await (const key of graph) {
       yield key;
     }
   },
 
   async get(key) {
-    const value = await object.get(key);
-    return value;
+    return graph.get(key);
   },
 };
 
-export default graph;
+export default delegate;

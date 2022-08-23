@@ -16,7 +16,7 @@ export default class FilesGraph {
   async get(key) {
     const filePath = path.join(this.dirname, key);
     try {
-      return fs.readFile(filePath);
+      return await fs.readFile(filePath);
     } catch (error) {
       if (error.code === "ENOENT") {
         return undefined;
