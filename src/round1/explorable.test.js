@@ -1,21 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
-
-// Explorable graph representation of a function and a domain
-const graph = {
-  // Iterator returns the keys (domain) in this graph.
-  async *[Symbol.asyncIterator]() {
-    const domain = ["Alice", "Bob", "Carol"];
-    for (const key of domain) {
-      yield key;
-    }
-  },
-
-  // Get function returns the value for a given key.
-  async get(key) {
-    return `Hello, ${key}!`;
-  },
-};
+import graph from "./explorable.js";
 
 test("can iterate over the keys of the graph", async () => {
   const keys = [];

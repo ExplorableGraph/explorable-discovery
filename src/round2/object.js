@@ -4,23 +4,12 @@ const obj = {
   "Carol.md": "Hello, **Carol**.",
 };
 
-// Direct Explorable representation of a function and domain
-const graph = {
-  // The domain: an iteration of keys
+export default {
   async *[Symbol.asyncIterator]() {
-    const domain = Object.keys(obj);
-    for (const key of domain) {
-      yield key;
-    }
+    yield* Object.keys(obj);
   },
 
-  // The function: returns the value for a given key
   async get(key) {
     return obj[key];
   },
 };
-
-for await (const key of graph) {
-  const value = await graph.get(key);
-  console.log(`${key}: ${value}`);
-}

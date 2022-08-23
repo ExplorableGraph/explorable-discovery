@@ -1,19 +1,7 @@
-const obj = {
+import { ObjectGraph } from "@explorablegraph/explorable";
+
+export default new ObjectGraph({
   "Alice.md": "Hello, **Alice**.",
   "Bob.md": "Hello, **Bob**.",
   "Carol.md": "Hello, **Carol**.",
-};
-
-const graph = {
-  async *[Symbol.asyncIterator]() {
-    for await (const key of Object.keys(obj)) {
-      yield key;
-    }
-  },
-
-  async get(key) {
-    return obj[key];
-  },
-};
-
-export default graph;
+});
