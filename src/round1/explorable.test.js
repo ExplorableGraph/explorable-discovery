@@ -16,6 +16,6 @@ test("can get the value for a key", async () => {
 });
 
 test("can get the value for a key that is not included by the iterator", async () => {
-  const alice = await graph.get("David");
-  assert.equal(alice, "Hello, David!");
+  const david = await graph.get("David");
+  assert.equal(david, "Hello, David!");
 });
