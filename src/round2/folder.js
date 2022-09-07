@@ -1,24 +1,12 @@
-import * as fs from "fs/promises";
-import path from "path";
-import { fileURLToPath } from "url";
+// import * as fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const moduleFolder = path.dirname(fileURLToPath(import.meta.url));
 const dirname = path.resolve(moduleFolder, "../markdown");
 
 export default {
-  async *[Symbol.asyncIterator]() {
-    yield* await fs.readdir(dirname);
-  },
+  async *[Symbol.asyncIterator]() {},
 
-  async get(key) {
-    let value;
-    try {
-      value = await fs.readFile(path.join(dirname, key));
-    } catch (error) {
-      if (error.code !== "ENOENT") {
-        throw error;
-      }
-    }
-    return value;
-  },
+  async get(key) {},
 };
