@@ -15,7 +15,7 @@ test("can iterate over the keys of the object", async () => {
 
 test("can get the value for a key", async () => {
   const alice = await graph.get("Alice.html");
-  assert.equal(alice, "<p>Hello, <strong>Alice<strong>.</p>");
+  assert.equal(alice, "<p>Hello, <strong>Alice</strong>.</p>\n");
 });
 
 test("getting a non-existent value returns undefined", async () => {

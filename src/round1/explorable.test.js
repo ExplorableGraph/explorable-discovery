@@ -11,8 +11,3 @@ test("can get the value for a key", async () => {
   const alice = undefined;
   assert.equal(alice, "Hello, Alice!");
 });
-
-test("can get the value for a key that is not included by the iterator", async () => {
-  const david = undefined;
-  assert.equal(david, "Hello, David!");
-});
