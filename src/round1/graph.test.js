@@ -14,3 +14,7 @@ test("can get the value for a key", async () => {
   const alice = await graph.get("Alice.md");
   assert.equal(alice, "Hello, **Alice**.");
 });
+
+test("getting an unsupported key returns undefined", async () => {
+  assert.equal(await graph.get("xyz"), undefined);
+});
