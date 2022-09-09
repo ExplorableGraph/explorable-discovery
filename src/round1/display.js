@@ -1,4 +1,4 @@
-import graph from "./explorable.js";
+import graph from "./graph.js";
 
 // Display the graph.
 for await (const key of graph) {
