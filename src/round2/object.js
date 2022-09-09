@@ -5,7 +5,11 @@ const obj = {
 };
 
 export default {
-  async *[Symbol.asyncIterator]() {},
+  async *[Symbol.asyncIterator]() {
+    yield* Object.keys(obj);
+  },
 
-  async get(key) {},
+  async get(key) {
+    return obj[key];
+  },
 };

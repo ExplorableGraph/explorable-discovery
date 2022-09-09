@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
-import graph from "./object.js";
+import graph from "./folder.js";
 
 test("can iterate over the keys of the graph", async () => {
   const keys = [];
