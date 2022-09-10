@@ -1,6 +1,1 @@
-[
-  ".keys.json",
-  "Alice.md",
-  "Bob.md",
-  "Carol.md"
-]
+["Alice.md", "Bob.md", "Carol.md"]
