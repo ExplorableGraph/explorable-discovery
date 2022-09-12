@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "type": "module",
   "dependencies": {
-    "@explorablegraph/explorable": "0.0.17",
+    "@explorablegraph/explorable": "github:ExplorableGraph/explorable#c55ce8ef",
     "marked": "4.0.16"
   }
 }
