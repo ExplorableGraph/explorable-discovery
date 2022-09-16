@@ -1,13 +1,15 @@
-// import ObjectGraph from "./Object.js";
-import FilesGraph from "./FilesGraph.js";
+import ComposeGraph from "./ComposeGraph.js";
+import fn from "./fn.js";
+import index from "./index.js";
+import markdownFolder from "./markdownFolder.js";
+import ObjectGraph from "./ObjectGraph.js";
 import transform from "./transform.js";
 
-// export default new ObjectGraph({
-//   "index.html": "<h1>Hello, world.</h1>",
-//   "Alice.html": "Hello, Alice.",
-// });
-
-const markdownGraph = new FilesGraph("markdown");
+const markdownGraph = new ComposeGraph(markdownFolder, fn);
 const htmlGraph = transform(markdownGraph);
+const indexHtml = index(htmlGraph);
 
-export default htmlGraph;
+export default new ObjectGraph({
+  "index.html": indexHtml,
+  people: htmlGraph,
+});

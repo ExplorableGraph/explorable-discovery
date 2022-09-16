@@ -11,7 +11,20 @@ export default class ObjectGraph {
     return this.obj[key];
   }
 
+  // async set(key, value) {
+  //   this.obj[key] = value;
+  // }
+
   async set(key, value) {
-    this.obj[key] = value;
+    if (key === undefined) {
+      // Apply the value as updates on top of this graph.
+      for await (const subKey of value) {
+        const subValue = await value.get(subKey);
+        await this.set(subKey, subValue);
+      }
+    } else {
+      // Set the value for the key.
+      this.object[key] = value;
+    }
   }
 }

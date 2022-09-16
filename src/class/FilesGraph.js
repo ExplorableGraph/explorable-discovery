@@ -39,8 +39,7 @@ export default class FilesGraph {
     await fs.mkdir(this.dirname, { recursive: true });
 
     // Where are we going to write this value?
-    const destPath =
-      key === undefined ? this.dirname : path.resolve(this.dirname, key);
+    const destPath = path.resolve(this.dirname, key ?? "");
 
     const isExplorable =
       typeof value?.[Symbol.asyncIterator] === "function" &&
