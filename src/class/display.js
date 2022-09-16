@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import path from "path";
 import process from "process";
 import plain from "./plain.js";
