@@ -1,6 +1,6 @@
 import { marked } from "marked";
 
-export default function transform(graph) {
+export default function (graph) {
   return {
     async *[Symbol.asyncIterator]() {
       for await (const markdownKey of graph) {
@@ -17,11 +17,7 @@ export default function transform(graph) {
           return marked(markdown.toString());
         }
       } else {
-        const value = await graph.get(key);
-        const isExplorable =
-          typeof value?.[Symbol.asyncIterator] === "function" &&
-          typeof value?.get === "function";
-        return isExplorable ? transform(value) : value;
+        return graph.get(key);
       }
     },
   };

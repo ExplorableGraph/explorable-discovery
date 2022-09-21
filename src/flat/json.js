@@ -3,7 +3,7 @@ import process from "node:process";
 
 // Resolve an asynchronous explorable graph to an in-memory object with string
 // keys and string values.
-export default async function plain(graph) {
+async function plain(graph) {
   const result = {};
   // Get each of the values from the graph.
   for await (const key of graph) {

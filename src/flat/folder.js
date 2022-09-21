@@ -14,7 +14,7 @@ export default {
   async get(key) {
     const filename = path.resolve(dirname, key);
     try {
-      return await fs.readFile(filename);
+      return await fs.readFile(filename); // Return file contents
     } catch (error) {
       if (error.code === "ENOENT") {
         return undefined;

@@ -7,5 +7,5 @@ export default new FunctionGraph(
       return `Hello, **${name}**.`;
     }
   },
-  ["Alice.md", "Bob.md", "Carol.md"]
+  ["David.md", "Eve.md", "Frank.md", "Grace.md"]
 );

@@ -1,3 +1,1 @@
-# Hello, Alice.
-
-Curiouser and curiouser!
+Hello, **Alice**.

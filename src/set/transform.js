@@ -18,12 +18,9 @@ export default function transform(graph) {
         }
       } else {
         const value = await graph.get(key);
-
-        // Is the value itself an explorable graph?
         const isExplorable =
           typeof value?.[Symbol.asyncIterator] === "function" &&
           typeof value?.get === "function";
-
         return isExplorable ? transform(value) : value;
       }
     },
