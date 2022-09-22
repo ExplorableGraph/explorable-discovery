@@ -1,6 +1,5 @@
 import path from "node:path";
 import process from "node:process";
-import plain from "./plain.js";
 
 // Resolve an asynchronous explorable graph to an in-memory object with string
 // keys and string values.
@@ -16,7 +15,7 @@ async function plain(graph) {
       typeof value?.get === "function";
 
     result[key.toString()] = isExplorable
-      ? await plain(value) // Traverse into explorable value.
+      ? await plain(value) // Recurse into explorable value.
       : value.toString();
   }
   return result;

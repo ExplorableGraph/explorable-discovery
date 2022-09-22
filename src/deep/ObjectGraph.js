@@ -9,7 +9,9 @@ export default class ObjectGraph {
 
   async get(key) {
     const value = this.obj[key];
-    const isPlainObject = Object.getPrototypeOf(value) === Object.prototype;
+    const isPlainObject =
+      typeof value === "object" &&
+      Object.getPrototypeOf(value) === Object.prototype;
     return isPlainObject ? new ObjectGraph(value) : value;
   }
 }
