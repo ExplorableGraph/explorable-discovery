@@ -25,7 +25,7 @@ export default class FilesGraph {
     }
 
     return stats.isDirectory()
-      ? new FilesGraph(filePath) // Return subdirectory as a graph
+      ? new this.constructor(filePath) // Return subdirectory as a graph
       : fs.readFile(filePath); // Return file contents
   }
 
@@ -59,7 +59,7 @@ export default class FilesGraph {
 
     if (isExplorable) {
       // Write out the contents of the value graph to the destination.
-      const destGraph = new FilesGraph(destPath);
+      const destGraph = new this.constructor(destPath);
       for await (const subKey of value) {
         const subValue = await value.get(subKey);
         await destGraph.set(subKey, subValue);

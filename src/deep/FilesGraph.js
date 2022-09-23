@@ -25,7 +25,7 @@ export default class FilesGraph {
     }
 
     return stats.isDirectory()
-      ? new FilesGraph(filePath) // Return subdirectory as a graph
+      ? new this.constructor(filePath) // Return subdirectory as a graph
       : fs.readFile(filePath); // Return file contents
   }
 }

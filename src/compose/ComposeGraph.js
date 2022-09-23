@@ -1,4 +1,4 @@
-export default class Compose {
+export default class ComposeGraph {
   constructor(...graphs) {
     this.graphs = graphs;
   }
@@ -34,7 +34,7 @@ export default class Compose {
     }
 
     if (explorableValues.length > 0) {
-      return new Compose(...explorableValues);
+      return new this.constructor(...explorableValues);
     }
   }
 }

@@ -12,7 +12,10 @@ export default class ObjectGraph {
     const isPlainObject =
       typeof value === "object" &&
       Object.getPrototypeOf(value) === Object.prototype;
-    return isPlainObject ? new ObjectGraph(value) : value;
+    const isExplorable =
+      typeof value?.[Symbol.asyncIterator] === "function" &&
+      typeof value?.get === "function";
+    return isPlainObject && !isExplorable ? new this.constructor(value) : value;
   }
 
   async set(key, value) {

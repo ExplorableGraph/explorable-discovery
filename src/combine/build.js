@@ -1,5 +1,5 @@
 import distFolder from "./distFolder.js";
 import setDeep from "./setDeep.js";
-import site from "./site.js";
+import combined from "./site.js";
 
-await setDeep(distFolder, site);
+await setDeep(distFolder, combined);
