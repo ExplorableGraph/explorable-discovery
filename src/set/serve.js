@@ -1,5 +1,5 @@
 import http from "node:http";
-import siteGraph from "./siteGraph.js";
+import siteGraph from "./htmlFolder.js";
 
 const port = 5000;
 
@@ -22,18 +22,30 @@ function requestListener(graph) {
   return async function (request, response) {
     console.log(request.url);
     const keys = keysFromUrl(request.url);
-    let data;
+    let value;
     try {
-      data = await traverse(graph, ...keys);
+      value = await traverse(graph, ...keys);
     } catch (error) {
       console.log(error.message);
     }
-    if (data !== undefined) {
+
+    const isExplorable =
+      typeof value?.[Symbol.asyncIterator] === "function" &&
+      typeof value?.get === "function";
+
+    if (isExplorable) {
+      // Redirect to the root of the explorable graph.
+      response.writeHead(307, { Location: `${request.url}/` });
+      response.end("ok");
+      return true;
+    } else if (value !== undefined) {
       response.writeHead(200, "Content-Type: text/html");
-      response.end(data);
+      response.end(value);
+      return true;
     } else {
       response.writeHead(404, "Content-Type: text/html");
       response.end(`Not found`, "utf-8");
+      return false;
     }
   };
 }
