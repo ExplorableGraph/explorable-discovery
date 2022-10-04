@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import test from "node:test";
-import folder from "./folder.js";
+import folder from "./files.js";
 import transform from "./transform.js";
 
 const graph = transform(folder);

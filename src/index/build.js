@@ -1,5 +1,5 @@
-import distFolder from "./distFolder.js";
-import htmlFolder from "./htmlFolder.js";
+import distFiles from "./distfiles.js";
+import htmlFiles from "./htmlfiles.js";
 import setDeep from "./setDeep.js";
 
-await setDeep(distFolder, htmlFolder);
+await setDeep(distFiles, htmlFiles);

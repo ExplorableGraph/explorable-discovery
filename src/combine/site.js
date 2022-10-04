@@ -1,11 +1,11 @@
+import htmlFiles from "./htmlfiles.js";
 import htmlFn from "./htmlFn.js";
-import htmlFolder from "./htmlFolder.js";
 import htmlObject from "./htmlObject.js";
 import indexPages from "./indexPages.js";
 import ObjectGraph from "./ObjectGraph.js";
 
 const combined = new ObjectGraph({
-  files: htmlFolder,
+  files: htmlFiles,
   function: htmlFn,
   object: htmlObject,
 });

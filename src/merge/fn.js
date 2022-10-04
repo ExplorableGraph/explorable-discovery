@@ -7,6 +7,6 @@ function fn(key) {
   }
 }
 
-const domain = ["David.md", "Eve.md", "Frank.md", "Grace.md"];
+const domain = ["Kelly.md", "Larry.md", "Michelle.md"];
 
 export default new FunctionGraph(fn, domain);

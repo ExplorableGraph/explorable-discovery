@@ -1,7 +1,7 @@
 import ComposeGraph from "./ComposeGraph.js";
 import fn from "./fn.js";
 import index from "./index.js";
-import markdownFolder from "./markdownFolder.js";
+import markdownFolder from "./markdownfiles.js";
 import ObjectGraph from "./ObjectGraph.js";
 import transform from "./transform.js";
 
