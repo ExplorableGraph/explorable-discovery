@@ -1,9 +1,9 @@
 {
-  "name": "@explorablegraph/pattern-intro",
+  "name": "@graphorigami/pattern-intro",
   "version": "0.0.1",
   "type": "module",
   "dependencies": {
-    "@explorablegraph/explorable": "github:ExplorableGraph/explorable#c55ce8ef",
+    "@graphorigami/origami": "github:GraphOrigami/origami#66ad20f3",
     "marked": "4.0.16"
   }
 }
