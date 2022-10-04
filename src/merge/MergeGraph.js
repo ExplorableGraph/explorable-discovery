@@ -1,4 +1,4 @@
-export default class ComposeGraph {
+export default class MergeGraph {
   constructor(...graphs) {
     this.graphs = graphs;
   }
