@@ -1,4 +1,4 @@
-import htmlFiles from "./htmlfiles.js";
+import htmlFiles from "./htmlFiles.js";
 import htmlFn from "./htmlFn.js";
 import htmlObject from "./htmlObject.js";
 import indexPages from "./indexPages.js";
