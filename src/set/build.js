@@ -1,4 +1,4 @@
-import distFiles from "./distfiles.js";
+import distFiles from "./distFiles.js";
 import setDeep from "./setDeep.js";
 import siteGraph from "./siteGraph.js";
 
