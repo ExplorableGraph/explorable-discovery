@@ -1,3 +1,1 @@
-import htmlFiles from "./htmlFiles.js";
-
-export default htmlFiles;
+export { default } from "./htmlFn.js";
