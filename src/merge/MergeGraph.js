@@ -33,8 +33,10 @@ export default class MergeGraph {
       }
     }
 
-    if (explorableValues.length > 0) {
-      return new this.constructor(...explorableValues);
-    }
+    return explorableValues.length === 0
+      ? undefined
+      : explorableValues.length === 1
+      ? explorableValues[0]
+      : new this.constructor(...explorableValues);
   }
 }
