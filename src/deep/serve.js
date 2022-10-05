@@ -1,5 +1,5 @@
 import http from "node:http";
-import siteGraph from "./htmlfiles.js";
+import siteGraph from "./siteGraph.js";
 
 const port = 5000;
 
