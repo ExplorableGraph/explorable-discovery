@@ -1,3 +1,4 @@
+// A representative portion of the domain over which the function is defined.
 const keys = ["Alice.md", "Bob.md", "Carol.md"];
 
 // Function to generate markdown for a key of the format "Alice.md"
