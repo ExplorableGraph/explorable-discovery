@@ -7,7 +7,7 @@ async function plain(graph) {
   const result = {};
   // Get each of the values from the graph.
   for await (const key of graph) {
-    let value = await graph.get(key);
+    const value = await graph.get(key);
     result[key.toString()] = value.toString();
   }
   return result;

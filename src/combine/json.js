@@ -7,8 +7,16 @@ async function plain(graph) {
   const result = {};
   // Get each of the values from the graph.
   for await (const key of graph) {
-    let value = await graph.get(key);
-    result[key.toString()] = value.toString();
+    const value = await graph.get(key);
+
+    // Is the value itself an explorable graph?
+    const isExplorable =
+      typeof value?.[Symbol.asyncIterator] === "function" &&
+      typeof value?.get === "function";
+
+    result[key.toString()] = isExplorable
+      ? await plain(value) // Recurse into explorable value.
+      : value.toString();
   }
   return result;
 }
