@@ -39,11 +39,11 @@ function requestListener(graph) {
       response.end("ok");
       return true;
     } else if (value !== undefined) {
-      response.writeHead(200, "Content-Type: text/html");
+      response.writeHead(200, { "Content-Type": "text/html" });
       response.end(value);
       return true;
     } else {
-      response.writeHead(404, "Content-Type: text/html");
+      response.writeHead(404, { "Content-Type": "text/html" });
       response.end(`Not found`, "utf-8");
       return false;
     }
