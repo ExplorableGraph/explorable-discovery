@@ -6,11 +6,6 @@ const moduleFolder = path.dirname(fileURLToPath(import.meta.url));
 const dirname = path.resolve(moduleFolder, "markdown");
 
 export default {
-  async *[Symbol.asyncIterator]() {
-    const filenames = await fs.readdir(dirname);
-    yield* filenames;
-  },
-
   async get(key) {
     const filename = path.resolve(dirname, key);
     try {
@@ -21,5 +16,9 @@ export default {
       }
       throw error;
     }
+  },
+
+  async keys() {
+    return fs.readdir(dirname);
   },
 };
