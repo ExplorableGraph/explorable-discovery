@@ -2,13 +2,6 @@ import { marked } from "marked";
 
 export default function (graph) {
   return {
-    async *[Symbol.asyncIterator]() {
-      for await (const markdownKey of graph) {
-        const htmlKey = markdownKey.replace(/\.md$/, ".html");
-        yield htmlKey;
-      }
-    },
-
     async get(key) {
       if (key.endsWith(".html")) {
         const markdownKey = key.replace(/\.html$/, ".md");
@@ -19,6 +12,12 @@ export default function (graph) {
       } else {
         return graph.get(key);
       }
+    },
+
+    async keys() {
+      const markdownKeys = Array.from(await graph.keys());
+      const htmlKeys = markdownKeys.map((key) => key.replace(/\.md$/, ".html"));
+      return htmlKeys;
     },
   };
 }

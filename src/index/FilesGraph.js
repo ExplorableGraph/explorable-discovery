@@ -6,11 +6,6 @@ export default class FilesGraph {
     this.dirname = path.resolve(process.cwd(), dirname);
   }
 
-  async *[Symbol.asyncIterator]() {
-    const filenames = await fs.readdir(this.dirname);
-    yield* filenames;
-  }
-
   async get(key) {
     const filePath = path.resolve(this.dirname, key);
 
@@ -29,46 +24,7 @@ export default class FilesGraph {
       : fs.readFile(filePath); // Return file contents
   }
 
-  async set(key, value) {
-    // Where are we going to write this value?
-    const destPath = path.resolve(this.dirname, key ?? "");
-
-    if (value === undefined) {
-      // Delete the file or directory.
-      let stats;
-      try {
-        stats = await stat(destPath);
-      } catch (/** @type {any} */ error) {
-        if (error.code === "ENOENT" /* File not found */) {
-          return;
-        }
-        throw error;
-      }
-      if (stats.isDirectory()) {
-        // Delete directory.
-        await fs.rm(destPath, { recursive: true });
-      } else if (stats) {
-        // Delete file.
-        await fs.unlink(destPath);
-      }
-    }
-
-    const isExplorable =
-      typeof value?.[Symbol.asyncIterator] === "function" &&
-      typeof value?.get === "function";
-
-    if (isExplorable) {
-      // Write out the contents of the value graph to the destination.
-      const destGraph = new this.constructor(destPath);
-      for await (const subKey of value) {
-        const subValue = await value.get(subKey);
-        await destGraph.set(subKey, subValue);
-      }
-    } else {
-      // Ensure this directory exists.
-      await fs.mkdir(this.dirname, { recursive: true });
-      // Write out the value as the contents of a file.
-      await fs.writeFile(destPath, value);
-    }
+  async keys() {
+    return fs.readdir(this.dirname);
   }
 }

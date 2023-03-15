@@ -2,13 +2,6 @@ import { marked } from "marked";
 
 export default function transform(graph) {
   return {
-    async *[Symbol.asyncIterator]() {
-      for await (const markdownKey of graph) {
-        const htmlKey = markdownKey.replace(/\.md$/, ".html");
-        yield htmlKey;
-      }
-    },
-
     async get(key) {
       if (key.endsWith(".html")) {
         const markdownKey = key.replace(/\.html$/, ".md");
@@ -21,11 +14,16 @@ export default function transform(graph) {
 
         // Is the value itself an explorable graph?
         const isExplorable =
-          typeof value?.[Symbol.asyncIterator] === "function" &&
-          typeof value?.get === "function";
+          typeof value?.get === "function" && typeof value?.keys === "function";
 
         return isExplorable ? transform(value) : value;
       }
+    },
+
+    async keys() {
+      const markdownKeys = Array.from(await graph.keys());
+      const htmlKeys = markdownKeys.map((key) => key.replace(/\.md$/, ".html"));
+      return htmlKeys;
     },
   };
 }

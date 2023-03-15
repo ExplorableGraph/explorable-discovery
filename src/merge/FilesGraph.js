@@ -6,11 +6,6 @@ export default class FilesGraph {
     this.dirname = path.resolve(process.cwd(), dirname);
   }
 
-  async *[Symbol.asyncIterator]() {
-    const filenames = await fs.readdir(this.dirname);
-    yield* filenames;
-  }
-
   async get(key) {
     const filePath = path.resolve(this.dirname, key);
 
@@ -27,6 +22,10 @@ export default class FilesGraph {
     return stats.isDirectory()
       ? new this.constructor(filePath) // Return subdirectory as a graph
       : fs.readFile(filePath); // Return file contents
+  }
+
+  async keys() {
+    return fs.readdir(this.dirname);
   }
 
   async set(key, value) {
@@ -54,13 +53,12 @@ export default class FilesGraph {
     }
 
     const isExplorable =
-      typeof value?.[Symbol.asyncIterator] === "function" &&
-      typeof value?.get === "function";
+      typeof value?.get === "function" && typeof value?.keys === "function";
 
     if (isExplorable) {
       // Write out the contents of the value graph to the destination.
       const destGraph = new this.constructor(destPath);
-      for await (const subKey of value) {
+      for (const subKey of await value.keys()) {
         const subValue = await value.get(subKey);
         await destGraph.set(subKey, subValue);
       }

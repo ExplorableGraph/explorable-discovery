@@ -3,26 +3,13 @@ export default class MergeGraph {
     this.graphs = graphs;
   }
 
-  async *[Symbol.asyncIterator]() {
-    const keys = new Set();
-    for (const graph of this.graphs) {
-      for await (const key of graph) {
-        if (!keys.has(key)) {
-          keys.add(key);
-          yield key;
-        }
-      }
-    }
-  }
-
   async get(key) {
     const explorableValues = [];
     for (const graph of this.graphs) {
       const value = await graph.get(key);
 
       const isExplorable =
-        typeof value?.[Symbol.asyncIterator] === "function" &&
-        typeof value?.get === "function";
+        typeof value?.get === "function" && typeof value?.keys === "function";
 
       if (value !== undefined) {
         if (isExplorable) {
@@ -38,5 +25,15 @@ export default class MergeGraph {
       : explorableValues.length === 1
       ? explorableValues[0]
       : new this.constructor(...explorableValues);
+  }
+
+  async keys() {
+    const keys = new Set();
+    for (const graph of this.graphs) {
+      for (const key of await graph.keys()) {
+        keys.add(key);
+      }
+    }
+    return keys;
   }
 }

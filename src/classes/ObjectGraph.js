@@ -3,11 +3,11 @@ export default class ObjectGraph {
     this.obj = obj;
   }
 
-  async *[Symbol.asyncIterator]() {
-    yield* Object.keys(this.obj);
-  }
-
   async get(key) {
     return this.obj[key];
+  }
+
+  async keys() {
+    return Object.keys(this.obj);
   }
 }

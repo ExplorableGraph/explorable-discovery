@@ -30,8 +30,7 @@ function requestListener(graph) {
     }
 
     const isExplorable =
-      typeof value?.[Symbol.asyncIterator] === "function" &&
-      typeof value?.get === "function";
+      typeof value?.get === "function" && typeof value?.keys === "function";
 
     if (isExplorable) {
       // Redirect to the root of the explorable graph.
@@ -39,10 +38,7 @@ function requestListener(graph) {
       response.end("ok");
       return true;
     } else if (value !== undefined) {
-      response.writeHead(200, {
-        "Content-Type": "text/html",
-        "X-Content-Type-Options": "nosniff",
-      });
+      response.writeHead(200, { "Content-Type": "text/html" });
       response.end(value);
       return true;
     } else {

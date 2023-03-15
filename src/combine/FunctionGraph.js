@@ -1,14 +1,14 @@
 export default class FunctionGraph {
-  constructor(fn, keys) {
+  constructor(fn, domain) {
     this.fn = fn;
-    this.keys = keys;
-  }
-
-  async *[Symbol.asyncIterator]() {
-    yield* this.keys;
+    this.domain = domain;
   }
 
   async get(key) {
     return this.fn(key);
+  }
+
+  async keys() {
+    return this.domain;
   }
 }

@@ -6,11 +6,6 @@ export default class FilesGraph {
     this.dirname = path.resolve(process.cwd(), dirname);
   }
 
-  async *[Symbol.asyncIterator]() {
-    const filenames = await fs.readdir(this.dirname);
-    yield* filenames;
-  }
-
   async get(key) {
     const filePath = path.resolve(this.dirname, key);
 
@@ -27,5 +22,9 @@ export default class FilesGraph {
     return stats.isDirectory()
       ? new this.constructor(filePath) // Return subdirectory as a graph
       : fs.readFile(filePath); // Return file contents
+  }
+
+  async keys() {
+    return fs.readdir(this.dirname);
   }
 }

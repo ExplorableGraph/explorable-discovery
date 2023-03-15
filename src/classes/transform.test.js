@@ -5,12 +5,12 @@ import transform from "./transform.js";
 
 const graph = transform(object);
 
-test("can iterate over the keys of the object", async () => {
-  const keys = [];
-  for await (const key of graph) {
-    keys.push(key);
-  }
-  assert.deepEqual(keys, ["Alice.html", "Bob.html", "Carol.html"]);
+test("can get the keys of the graph", async () => {
+  assert.deepEqual(await graph.keys(), [
+    "Alice.html",
+    "Bob.html",
+    "Carol.html",
+  ]);
 });
 
 test("can get the value for a key", async () => {

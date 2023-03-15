@@ -30,9 +30,7 @@ function requestListener(graph) {
     }
 
     const isExplorable =
-      typeof value?.[Symbol.asyncIterator] === "function" &&
-      typeof value?.get === "function";
-
+      typeof value?.get === "function" && typeof value?.keys === "function";
     if (isExplorable) {
       // Redirect to the root of the explorable graph.
       response.writeHead(307, { Location: `${request.url}/` });

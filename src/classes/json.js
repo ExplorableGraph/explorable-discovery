@@ -6,7 +6,7 @@ import { pathToFileURL } from "node:url";
 async function plain(graph) {
   const result = {};
   // Get each of the values from the graph.
-  for await (const key of graph) {
+  for (const key of await graph.keys()) {
     const value = await graph.get(key);
     result[key.toString()] = value.toString();
   }

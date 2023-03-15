@@ -6,11 +6,6 @@ export default class FilesGraph {
     this.dirname = path.resolve(process.cwd(), dirname);
   }
 
-  async *[Symbol.asyncIterator]() {
-    const filenames = await fs.readdir(this.dirname);
-    yield* filenames;
-  }
-
   async get(key) {
     const fileName = path.resolve(this.dirname, key);
     try {
@@ -21,5 +16,9 @@ export default class FilesGraph {
       }
       throw error;
     }
+  }
+
+  async keys() {
+    return fs.readdir(this.dirname);
   }
 }
