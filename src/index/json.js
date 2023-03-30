@@ -21,7 +21,7 @@ async function plain(graph) {
 }
 
 // Get a file name from the command line.
-const [node, display, moduleName] = process.argv;
+const [node, command, moduleName] = process.argv;
 const modulePath = path.resolve(process.cwd(), moduleName);
 
 // On Windows, import paths must be valid file:// URLs.
