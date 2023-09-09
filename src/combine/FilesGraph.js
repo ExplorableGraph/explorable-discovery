@@ -52,10 +52,10 @@ export default class FilesGraph {
       }
     }
 
-    const isExplorable =
+    const isAsyncDictionary =
       typeof value?.get === "function" && typeof value?.keys === "function";
 
-    if (isExplorable) {
+    if (isAsyncDictionary) {
       // Write out the contents of the value graph to the destination.
       const destGraph = new this.constructor(destPath);
       for (const subKey of await value.keys()) {

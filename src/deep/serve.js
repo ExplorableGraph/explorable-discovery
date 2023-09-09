@@ -29,10 +29,10 @@ function requestListener(graph) {
       console.log(error.message);
     }
 
-    const isExplorable =
+    const isAsyncDictionary =
       typeof value?.get === "function" && typeof value?.keys === "function";
-    if (isExplorable) {
-      // Redirect to the root of the explorable graph.
+    if (isAsyncDictionary) {
+      // Redirect to the root of the async graph.
       response.writeHead(307, { Location: `${request.url}/` });
       response.end("ok");
       return true;

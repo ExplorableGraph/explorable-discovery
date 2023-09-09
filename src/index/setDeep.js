@@ -2,18 +2,18 @@
 export default async function setDeep(target, source) {
   for (const key of await source.keys()) {
     const sourceValue = await source.get(key);
-    const sourceExplorable =
+    const sourceIsAsyncDictionary =
       typeof sourceValue?.[Symbol.asyncIterator] === "function" &&
       typeof sourceValue?.get === "function";
 
-    if (sourceExplorable) {
+    if (sourceIsAsyncDictionary) {
       const targetValue = await target.get(key);
-      const targetExplorable =
+      const targetIsAsyncDictionary =
         typeof targetValue?.[Symbol.asyncIterator] === "function" &&
         typeof targetValue?.get === "function";
 
-      if (targetExplorable) {
-        // Both source and target are explorable; recurse.
+      if (targetIsAsyncDictionary) {
+        // Both source and target are async dictionaries; recurse.
         await setDeep(targetValue, sourceValue);
         continue;
       }

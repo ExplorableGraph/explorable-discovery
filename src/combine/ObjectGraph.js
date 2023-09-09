@@ -8,9 +8,11 @@ export default class ObjectGraph {
     const isPlainObject =
       typeof value === "object" &&
       Object.getPrototypeOf(value) === Object.prototype;
-    const isExplorable =
+    const isAsyncDictionary =
       typeof value?.get === "function" && typeof value?.keys === "function";
-    return isPlainObject && !isExplorable ? new this.constructor(value) : value;
+    return isPlainObject && !isAsyncDictionary
+      ? new this.constructor(value)
+      : value;
   }
 
   async keys() {

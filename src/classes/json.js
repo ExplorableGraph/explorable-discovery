@@ -2,7 +2,7 @@ import path from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 
-// Resolve an explorable graph to an object with string keys and string values.
+// Resolve an async graph to an object with string keys and string values.
 async function plain(graph) {
   const result = {};
   // Get each of the values from the graph.

@@ -12,11 +12,11 @@ export default function transform(graph) {
       } else {
         const value = await graph.get(key);
 
-        // Is the value itself an explorable graph?
-        const isExplorable =
+        // Is the value itself an async graph node?
+        const isAsyncDictionary =
           typeof value?.get === "function" && typeof value?.keys === "function";
 
-        return isExplorable ? transform(value) : value;
+        return isAsyncDictionary ? transform(value) : value;
       }
     },
 

@@ -4,27 +4,27 @@ export default class MergeGraph {
   }
 
   async get(key) {
-    const explorableValues = [];
+    const subgraphs = [];
     for (const graph of this.graphs) {
       const value = await graph.get(key);
 
-      const isExplorable =
+      const isAsyncDictionary =
         typeof value?.get === "function" && typeof value?.keys === "function";
 
       if (value !== undefined) {
-        if (isExplorable) {
-          explorableValues.push(value);
+        if (isAsyncDictionary) {
+          subgraphs.push(value);
         } else {
           return value;
         }
       }
     }
 
-    return explorableValues.length === 0
+    return subgraphs.length === 0
       ? undefined
-      : explorableValues.length === 1
-      ? explorableValues[0]
-      : new this.constructor(...explorableValues);
+      : subgraphs.length === 1
+      ? subgraphs[0]
+      : new this.constructor(...subgraphs);
   }
 
   async keys() {

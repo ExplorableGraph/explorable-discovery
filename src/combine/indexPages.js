@@ -6,10 +6,10 @@ export default function indexPages(graph) {
         // No index page defined; create one
         return indexPage(graph);
       } else {
-        // If we're returning an explorable subgraph, add index pages to it too.
-        const isExplorable =
+        // If we're returning an async subgraph, add index pages to it too.
+        const isAsyncDictionary =
           typeof value?.get === "function" && typeof value?.keys === "function";
-        return isExplorable ? indexPages(value) : value;
+        return isAsyncDictionary ? indexPages(value) : value;
       }
     },
 

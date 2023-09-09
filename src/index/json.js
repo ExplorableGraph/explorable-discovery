@@ -2,19 +2,19 @@ import path from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 
-// Resolve an explorable graph to an object with string keys and string values.
+// Resolve an async graph to an object with string keys and string values.
 async function plain(graph) {
   const result = {};
   // Get each of the values from the graph.
   for (const key of await graph.keys()) {
     const value = await graph.get(key);
 
-    // Is the value itself an explorable graph?
-    const isExplorable =
+    // Is the value itself an async graph node?
+    const isAsyncDictionary =
       typeof value?.get === "function" && typeof value?.keys === "function";
 
-    result[key.toString()] = isExplorable
-      ? await plain(value) // Recurse into explorable value.
+    result[key.toString()] = isAsyncDictionary
+      ? await plain(value) // Recurse into subgraph.
       : value.toString();
   }
   return result;
