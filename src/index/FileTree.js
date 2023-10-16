@@ -1,7 +1,7 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
 
-export default class FilesGraph {
+export default class FileTree {
   constructor(dirname) {
     this.dirname = path.resolve(process.cwd(), dirname);
   }
@@ -20,7 +20,7 @@ export default class FilesGraph {
     }
 
     return stats.isDirectory()
-      ? new this.constructor(filePath) // Return subdirectory as a graph
+      ? new this.constructor(filePath) // Return subdirectory as a tree
       : fs.readFile(filePath); // Return file contents
   }
 

@@ -1,18 +1,18 @@
 import { marked } from "marked";
 
-export default function transform(graph) {
+export default function transform(tree) {
   return {
     async get(key) {
       if (key.endsWith(".html")) {
         const markdownKey = key.replace(/\.html$/, ".md");
-        const markdown = await graph.get(markdownKey);
+        const markdown = await tree.get(markdownKey);
         if (markdown) {
           return marked(markdown.toString());
         }
       } else {
-        const value = await graph.get(key);
+        const value = await tree.get(key);
 
-        // Is the value itself an async graph node?
+        // Is the value itself an async tree node?
         const isAsyncDictionary =
           typeof value?.get === "function" && typeof value?.keys === "function";
 
@@ -21,7 +21,7 @@ export default function transform(graph) {
     },
 
     async keys() {
-      const markdownKeys = Array.from(await graph.keys());
+      const markdownKeys = Array.from(await tree.keys());
       const htmlKeys = markdownKeys.map((key) => key.replace(/\.md$/, ".html"));
       return htmlKeys;
     },

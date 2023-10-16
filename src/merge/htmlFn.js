@@ -1,4 +1,4 @@
-import graph from "./fn.js";
+import tree from "./fn.js";
 import transform from "./transform.js";
 
-export default transform(graph);
+export default transform(tree);

@@ -1,5 +1,5 @@
 import http from "node:http";
-import siteGraph from "./siteGraph.js";
+import siteTree from "./siteTree.js";
 
 const port = 5000;
 
@@ -17,14 +17,14 @@ function keysFromUrl(url) {
   return keys;
 }
 
-// Given a graph, return a listener function that serves the graph.
-function requestListener(graph) {
+// Given a tree, return a listener function that serves the tree.
+function requestListener(tree) {
   return async function (request, response) {
     console.log(request.url);
     const keys = keysFromUrl(request.url);
     let value;
     try {
-      value = await traverse(graph, ...keys);
+      value = await traverse(tree, ...keys);
     } catch (error) {
       console.log(error.message);
     }
@@ -33,7 +33,7 @@ function requestListener(graph) {
       typeof value?.get === "function" && typeof value?.keys === "function";
 
     if (isAsyncDictionary) {
-      // Redirect to the root of the async graph.
+      // Redirect to the root of the async tree.
       response.writeHead(307, { Location: `${request.url}/` });
       response.end("ok");
       return true;
@@ -49,9 +49,9 @@ function requestListener(graph) {
   };
 }
 
-// Traverse a path of keys through a graph.
-async function traverse(graph, ...keys) {
-  let value = graph;
+// Traverse a path of keys through a tree.
+async function traverse(tree, ...keys) {
+  let value = tree;
   for (const key of keys) {
     value = await value.get(key);
     if (value === undefined) {
@@ -63,7 +63,7 @@ async function traverse(graph, ...keys) {
 }
 
 // Start the server.
-const server = http.createServer(requestListener(siteGraph));
+const server = http.createServer(requestListener(siteTree));
 server.listen(port, undefined, () => {
   console.log(
     `Server running at http://localhost:${port}. Press Ctrl+C to stop.`

@@ -1,4 +1,4 @@
-import FunctionGraph from "./FunctionGraph.js";
+import FunctionTree from "./FunctionTree.js";
 
 function fn(key) {
   if (key.endsWith(".md") && key !== "index.md") {
@@ -9,4 +9,4 @@ function fn(key) {
 
 const domain = ["Kelly.md", "Larry.md", "Michelle.md"];
 
-export default new FunctionGraph(fn, domain);
+export default new FunctionTree(fn, domain);

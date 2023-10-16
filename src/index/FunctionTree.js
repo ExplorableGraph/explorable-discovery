@@ -1,4 +1,4 @@
-export default class FunctionGraph {
+export default class FunctionTree {
   constructor(fn, domain) {
     this.fn = fn;
     this.domain = domain;

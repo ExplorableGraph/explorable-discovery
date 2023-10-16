@@ -1,4 +1,4 @@
-import graph from "./object.js";
+import tree from "./object.js";
 import transform from "./transform.js";
 
-export default transform(graph);
+export default transform(tree);

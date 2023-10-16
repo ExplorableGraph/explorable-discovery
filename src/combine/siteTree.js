@@ -2,9 +2,9 @@ import htmlFiles from "./htmlFiles.js";
 import htmlFn from "./htmlFn.js";
 import htmlObject from "./htmlObject.js";
 import indexPages from "./indexPages.js";
-import ObjectGraph from "./ObjectGraph.js";
+import ObjectTree from "./ObjectTree.js";
 
-const combined = new ObjectGraph({
+const combined = new ObjectTree({
   files: htmlFiles,
   function: htmlFn,
   object: htmlObject,

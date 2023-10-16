@@ -1,7 +1,7 @@
 import * as fs from "node:fs/promises";
 import path from "node:path";
 
-export default class FilesGraph {
+export default class FileTree {
   constructor(dirname) {
     this.dirname = path.resolve(process.cwd(), dirname);
   }

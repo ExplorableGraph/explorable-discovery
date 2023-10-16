@@ -1,4 +1,4 @@
-export default class ObjectGraph {
+export default class ObjectTree {
   constructor(obj) {
     this.obj = obj;
   }

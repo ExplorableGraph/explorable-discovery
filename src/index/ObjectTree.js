@@ -1,4 +1,4 @@
-export default class ObjectGraph {
+export default class ObjectTree {
   constructor(obj) {
     this.obj = obj;
   }
@@ -17,13 +17,5 @@ export default class ObjectGraph {
 
   async keys() {
     return Object.keys(this.obj);
-  }
-
-  async set(key, value) {
-    if (value === undefined) {
-      delete this.obj[key];
-    } else {
-      this.obj[key] = value;
-    }
   }
 }

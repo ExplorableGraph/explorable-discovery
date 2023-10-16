@@ -2,19 +2,19 @@ import path from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 
-// Resolve an async graph to an object with string keys and string values.
-async function plain(graph) {
+// Resolve an async tree to an object with string keys and string values.
+async function plain(tree) {
   const result = {};
-  // Get each of the values from the graph.
-  for (const key of await graph.keys()) {
-    const value = await graph.get(key);
+  // Get each of the values from the tree.
+  for (const key of await tree.keys()) {
+    const value = await tree.get(key);
 
-    // Is the value itself an async graph node?
+    // Is the value itself an async tree node?
     const isAsyncDictionary =
       typeof value?.get === "function" && typeof value?.keys === "function";
 
     result[key.toString()] = isAsyncDictionary
-      ? await plain(value) // Recurse into subgraph.
+      ? await plain(value) // Recurse into subtree.
       : value.toString();
   }
   return result;
@@ -30,11 +30,11 @@ const moduleUrl = pathToFileURL(modulePath);
 // Load the module.
 const module = await import(moduleUrl);
 
-// Take the module's default export as a graph.
-const graph = module.default;
+// Take the module's default export as a tree.
+const tree = module.default;
 
-// Resolve the graph to an in-memory object.
-const obj = await plain(graph);
+// Resolve the tree to an in-memory object.
+const obj = await plain(tree);
 
 // Convert to JSON text and display it.
 const json = JSON.stringify(obj, null, 2);

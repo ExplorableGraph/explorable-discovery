@@ -1,5 +1,5 @@
 import distFiles from "./distFiles.js";
 import setDeep from "./setDeep.js";
-import siteGraph from "./siteGraph.js";
+import siteTree from "./siteTree.js";
 
-await setDeep(distFiles, siteGraph);
+await setDeep(distFiles, siteTree);
